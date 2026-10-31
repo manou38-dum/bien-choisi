@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tailles et bonnets</title>
+<meta name="description" content="Bien Choisi compare le linge de lit pour les dormeurs qui ont chaud la nuit : fibres, étiquettes, labels et prix relevés.">
+<style>
+
+/* Mise en page : colonne éditoriale unique ; un grand chiffre d'ouverture, un graphique à l'échelle, un comparatif en tableau, un bloc marques. Registre « nuit d'été » : bleu nuit, papier frais, accent eucalyptus. */
+:root {
+  --bg: #f2f5f8;
+  --paper: #ffffff;
+  --ink: #142033;
+  --muted: #56637a;
+  --line: #d6dde8;
+  --accent: #1f6f78;
+  --accent-soft: #e0eef0;
+  --warm: #b4532a;
+  --display: "Young Serif", Georgia, "Times New Roman", serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1522; --paper: #151f30; --ink: #e5ebf4; --muted: #a2afc4;
+    --line: #26344b; --accent: #6cc3cb; --accent-soft: #17303a; --warm: #e58a5f; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1522; --paper: #151f30; --ink: #e5ebf4; --muted: #a2afc4;
+  --line: #26344b; --accent: #6cc3cb; --accent-soft: #17303a; --warm: #e58a5f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1.0625rem; line-height: 1.65; }
+.wrap {
+  max-width: 44rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-block: 1.1rem; }
+.brand { font-family: var(--display); font-size: 1.3rem; }
+.brand small { font-family: var(--body); font-size: 0.8rem; color: var(--muted); margin-left: 0.4rem; }
+.tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); }
+main { display: flex; flex-direction: column; gap: 3.25rem; padding-block: 1.5rem 4rem; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 5.5vw, 3.1rem); line-height: 1.1; margin: 0.4rem 0 1rem; text-wrap: balance; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.2; margin: 0.3rem 0 0.8rem; text-wrap: balance; }
+p { margin: 0 0 0.9rem; max-width: 65ch; }
+.lead { font-size: 1.15rem; color: var(--muted); }
+.stat { display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 1rem; margin-top: 1.25rem; }
+.stat b { font-family: var(--display); font-weight: 400; font-size: 3rem; line-height: 1; color: var(--warm); font-variant-numeric: tabular-nums; }
+.stat span { flex: 1 1 16rem; min-width: 0; color: var(--muted); font-size: 0.95rem; }
+.src { font-size: 0.82rem; color: var(--muted); }
+.src a { color: var(--muted); }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.bars { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.25rem 0 0.75rem; }
+.bar { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) 3.5rem; gap: 0.75rem; align-items: center; }
+.bar .name { font-weight: 500; }
+.bar .track { background: var(--accent-soft); height: 0.9rem; border-radius: 2px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--accent); }
+.bar .val { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+.labels { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.labels li { background: var(--paper); border: 1px solid var(--line); padding: 0.9rem 1rem; min-width: 0; }
+.labels strong { display: block; }
+.ok { color: var(--accent); } .no { color: var(--warm); }
+@media (max-width: 520px) { .labels { grid-template-columns: 1fr; } .bar { grid-template-columns: 5.5rem minmax(0, 1fr) 3rem; } }
+.tablewrap { overflow-x: auto; margin-top: 1rem; border: 1px solid var(--line); background: var(--paper); }
+table { border-collapse: collapse; width: 100%; min-width: 38rem; font-size: 0.93rem; }
+th, td { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+td.prix { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.pill { display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.05rem 0.45rem; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.pill.warn { background: transparent; border: 1px solid var(--warm); color: var(--warm); }
+.pro { background: var(--paper); border: 1px solid var(--line); padding: 1.4rem; }
+.pro ul { margin: 0.5rem 0 1rem; padding-left: 1.1rem; }
+.mail { font-weight: 700; user-select: all; word-break: break-all; }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.88rem; }
+footer .wrap { padding-block: 1.5rem 2rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.todo { background: var(--accent-soft); padding: 0 0.3rem; font-size: 0.82rem; }
+nav.site { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.92rem; }
+nav.site a { color: var(--muted); text-decoration: none; }
+nav.site a[aria-current="page"] { color: var(--accent); font-weight: 700; }
+nav.site a:hover { color: var(--accent); }
+.checklist { list-style: none; padding: 0; margin: 1rem 0 0; border-top: 1px solid var(--line); }
+.checklist li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 480px) { .checklist li { grid-template-columns: 1fr; gap: 0.2rem; } }
+.next { display: flex; gap: 1rem; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 1rem; }
+body{margin:0}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">Bien Choisi<small>nuits fraîches</small></div>
+    <nav class="site" aria-label="Pages"><a href="./">Le guide</a><a href="fibres.html">Les fibres</a><a href="tailles.html" aria-current="page">Les tailles</a><a href="partenaires.html">Marques</a></nav>
+  </div>
+</header>
+<main class="wrap">
+  <section>
+    <div class="tag">Guide · tailles</div>
+    <h1>Tailles françaises et hauteur de bonnet : bien mesurer avant d'acheter</h1>
+    <p class="lead">Un drap-housse trop court se défait dès qu'on bouge, une housse trop petite découvre les pieds. Deux mesures suffisent pour ne pas se tromper.</p>
+  </section>
+
+  <section>
+    <div class="tag">Étape 1</div>
+    <h2>Mesurez votre matelas, pas votre lit</h2>
+    <p>Prenez la largeur, la longueur et surtout l'<strong>épaisseur</strong> du matelas, avec le surmatelas s'il y en a un. Le cadre du lit ne compte pas.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Matelas courant en France</th><th>Drap-housse</th><th>Housse de couette conseillée</th><th>Taies</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1 personne</strong></td><td class="prix">90 × 190</td><td>140 × 200</td><td>65 × 65 (×1)</td></tr>
+          <tr><td><strong>2 personnes, classique</strong></td><td class="prix">140 × 190</td><td>200 × 200 ou 220 × 240</td><td>65 × 65 (×2)</td></tr>
+          <tr><td><strong>2 personnes, « queen »</strong></td><td class="prix">160 × 200</td><td>240 × 220</td><td>65 × 65 (×2)</td></tr>
+          <tr><td><strong>2 personnes, « king »</strong></td><td class="prix">180 × 200</td><td>240 × 260</td><td>65 × 65 (×2)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src" style="margin-top:0.6rem">Tailles standard du commerce français. Les marques étrangères vendent souvent en 200 cm de long (90 × 200, 140 × 200) et en taies 50 × 75 : vérifiez avant de commander.</p>
+  </section>
+
+  <section>
+    <div class="tag">Étape 2</div>
+    <h2>Le bonnet : épaisseur du matelas + 5 cm</h2>
+    <p>Le « bonnet » est la hauteur du rabat qui passe sous le matelas. Choisissez-le au moins 5 cm plus haut que l'épaisseur mesurée.</p>
+    <div class="bars" role="img" aria-label="Bonnet conseillé selon l'épaisseur du matelas">
+      <div class="bar"><span class="name">Matelas 20 cm</span><span class="track"><span class="fill" style="width:62.5%"></span></span><span class="val">25 cm</span></div>
+      <div class="bar"><span class="name">Matelas 25 cm</span><span class="track"><span class="fill" style="width:75%"></span></span><span class="val">30 cm</span></div>
+      <div class="bar"><span class="name">Matelas 30 cm</span><span class="track"><span class="fill" style="width:87.5%"></span></span><span class="val">35 cm</span></div>
+      <div class="bar"><span class="name">+ surmatelas</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">40 cm</span></div>
+    </div>
+    <p class="src">Barres à l'échelle sur 40 cm. Exemple : le drap Easy Dort a un bonnet de 25 cm pour un matelas de 22 cm au plus ; le Terre de Nuit un bonnet de 30 cm.</p>
+  </section>
+
+  <section>
+    <div class="tag">Bon à savoir</div>
+    <h2>La viscose rétrécit un peu</h2>
+    <p>Les draps en viscose de bambou peuvent perdre quelques pour cent au premier lavage. Si vous hésitez entre deux bonnets, prenez le plus grand et lavez à 30-40 °C, comme le recommandent la plupart des fabricants.</p>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>Prix relevés le 31/10/2026. Contenu informatif, aucun conseil médical. Certains liens peuvent être affiliés, ils sont alors signalés.</span>
+    <span><a href="legal.html">Mentions légales et confidentialité</a> · contact@relaisnegoce.com · © 2026 Bien Choisi</span>
+  </div>
+</footer>
+</body>
+</html>
